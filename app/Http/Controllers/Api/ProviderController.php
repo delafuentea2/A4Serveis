@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Models\Provider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-//use App\Http\Resources\ProviderResource;
 use App\Http\Requests\ProviderRequest;
 use App\Http\Resources\ProviderResource;
 
@@ -42,16 +41,16 @@ class ProviderController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data= $request->validate([
             'name' => 'required',
             'company_name' => 'required',
             'phone' => 'required',
         ]);
         
         $provider = new Provider([
-            'name' => $request->input('name'),
-            'company_name' => $request->input('company_name'),
-            'phone' => $request->input('phone'),
+            'name' => $data['name'],
+            'company_name' => $data['company_name'],
+            'phone' => $data['phone']
 
         ]);
         $provider->save();
