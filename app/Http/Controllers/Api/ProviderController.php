@@ -46,14 +46,12 @@ class ProviderController extends Controller
             'name' => 'required',
             'company_name' => 'required',
             'phone' => 'required',
-            'category' => 'required',
         ]);
         
         $provider = new Provider([
             'name' => $request->input('name'),
             'company_name' => $request->input('company_name'),
             'phone' => $request->input('phone'),
-            'category' => $request->input('category'),
 
         ]);
         $provider->save();
@@ -108,16 +106,14 @@ class ProviderController extends Controller
 
         $data= $request->validate([
             'name' => 'required',
-            'price' => 'required',
-            'descripcion' => 'required',
-            'category' => 'required',
+            'company_name' => 'required',
+            'phone' => 'required',
         ]);
-
-        $provider->update([
+        
+        $provider->update()([
             'name' => $data['name'],
-            'price' => $data['price'],
-            'descripcion' => $data['descripcion'],
-            'category' => $data['category'],
+            'company_name' => $data['company_name'],
+            'phone' => $data['phone']
         ]);
 
         return response()->json([
