@@ -46,7 +46,7 @@ class ProviderController extends Controller
             'company_name' => 'required',
             'phone' => 'required',
         ]);
-        
+
         $provider = new Provider([
             'name' => $data['name'],
             'company_name' => $data['company_name'],
@@ -57,7 +57,7 @@ class ProviderController extends Controller
 
         return response()->json([
 			'success'=>true,
-			'data'=>'Sucessful user created'
+			'data'=>'Sucessful provider created'
 		],201);
     }
 
@@ -72,7 +72,7 @@ class ProviderController extends Controller
         $provider = Provider::find($id);
 
         if (!$provider) {
-            return response()->json(['message' => 'Product not found'], 404);
+            return response()->json(['message' => 'Provider not found'], 404);
         }
 
         return $provider;
@@ -100,7 +100,7 @@ class ProviderController extends Controller
     {
         $provider = Provider::find($id);
         if (!$provider) {
-            return response()->json(['message' => 'Product not found'], 404);
+            return response()->json(['message' => 'Provider not found'], 404);
         }
 
         $data= $request->validate([
@@ -108,8 +108,8 @@ class ProviderController extends Controller
             'company_name' => 'required',
             'phone' => 'required',
         ]);
-        
-        $provider->update()([
+
+        $provider->update([
             'name' => $data['name'],
             'company_name' => $data['company_name'],
             'phone' => $data['phone']
@@ -117,8 +117,8 @@ class ProviderController extends Controller
 
         return response()->json([
 			'success'=>true,
-			'data'=>'Sucessful user created'
-		],201);
+			'data'=>'Sucessful provider updated'
+		],200);
     }
 
     /**

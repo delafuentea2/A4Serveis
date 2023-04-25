@@ -27,6 +27,10 @@ Route::get('products',[Api\ProductController::class, 'index']);
 
 Route::get('products/{id}',[Api\ProductController::class, 'show']);
 
+/* PREUBAS DE PORQUE NO VA EL UPDATE PERO LO DEMÁS SI FUNCIONA */
+Route::post('products/check/{id}',[Api\ProductController::class, 'checkUpdate']);
+Route::get('products/check/{id}',[Api\ProductController::class, 'checkObject']);
+
 Route::post('products/create',[Api\ProductController::class, 'store']);
 Route::put('products/update/{id}',[Api\ProductController::class, 'update']);
 Route::delete('products/delete/{id}',[Api\ProductController::class, 'destroy']);

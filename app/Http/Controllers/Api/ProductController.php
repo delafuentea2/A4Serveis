@@ -24,7 +24,6 @@ class ProductController extends Controller
         return response()->json($r);
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -33,18 +32,18 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $request->validate([
+        $data=$request->validate([
             'name' => 'required',
             'price' => 'required',
-            'descripcion' => 'required',
-            //'category' => 'required',
+            'description' => 'required',
+            'category' => 'required',
         ]);
-        
+        //$data= $request->validated();
         $product = new Product([
-            'name' => $request->input('name'),
-            'price' => $request->input('price'),
-            'descripcion' => $request->input('descripcion'),
-            //'category' => $request->input('category'),
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'description' => $data['description'],
+            'category' => $data['category'],
 
         ]);
         $product->save();
@@ -63,7 +62,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-      
+
         $product = Product::find($id);
 
         if (!$product) {
@@ -82,29 +81,28 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
-           
+
         $product = Product::find($id);
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
-
         $data= $request->validate([
             'name' => 'required',
             'price' => 'required',
-            'descripcion' => 'required',
+            'description' => 'required',
             'category' => 'required',
         ]);
-
         $product->update([
             'name' => $data['name'],
             'price' => $data['price'],
-            'descripcion' => $data['descripcion'],
+            'description' => $data['description'],
             'category' => $data['category'],
         ]);
 
+
         return response()->json([
 			'success'=>true,
-			'data'=>'Sucessful user created'
+			'data'=>'Sucessful product updated',
 		],201);
     }
 
@@ -117,6 +115,54 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
         $product->delete();
+
+        return response()->json([
+            'success' => true,
+            'data' => 'Successful product deleted'
+        ], 200);
+    }
+
+    public function checkUpdate(ProductRequest $request, $id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+        var_dump("_________PRODUCTO ORIGINAL__________");
+        var_dump($product);
+        $data= $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'category' => 'required',
+        ]);
+        var_dump("_________PRODUCTO PARA CAMBIAR__________");
+        var_dump($data);
+        $product->update([
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'description' => $data['description'],
+            'category' => $data['category'],
+        ]);
+        var_dump("_________PRODUCT POST-UPDATE__________");
+        var_dump($product);
+        return response()->json([
+			'success'=>true,
+			'data'=>'Sucessful product updated',
+		],201);
+
+    }
+
+    public function checkObject($id)
+    {
+        $product = Product::find($id);
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+        dd($product);
     }
 }
