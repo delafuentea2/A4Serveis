@@ -32,7 +32,7 @@ Route::post('products/check/{id}',[Api\ProductController::class, 'checkUpdate'])
 Route::get('products/check/{id}',[Api\ProductController::class, 'checkObject']);
 
 Route::post('products/create',[Api\ProductController::class, 'store']);
-Route::put('products/update/{id}',[Api\ProductController::class, 'update']);
+Route::post('products/update/{id}',[Api\ProductController::class, 'update']);
 Route::delete('products/delete/{id}',[Api\ProductController::class, 'destroy']);
 
 //PROVIDERS

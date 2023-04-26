@@ -99,7 +99,6 @@ class ProductController extends Controller
             'category' => $data['category'],
         ]);
 
-
         return response()->json([
 			'success'=>true,
 			'data'=>'Sucessful product updated',
@@ -150,6 +149,7 @@ class ProductController extends Controller
         ]);
         var_dump("_________PRODUCT POST-UPDATE__________");
         var_dump($product);
+
         return response()->json([
 			'success'=>true,
 			'data'=>'Sucessful product updated',
